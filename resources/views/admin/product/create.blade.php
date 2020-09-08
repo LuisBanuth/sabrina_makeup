@@ -78,7 +78,7 @@
     <script>
         const inputElement = document.querySelector('input[type="file"]');
         const pond = FilePond.create(inputElement, {maxFiles: 10,} );
-        const urlFilePond = '/sabrina/public/filepond/'; //alterar na versão final
+        const urlFilePond = '/sabrina_makeup/public/filepond/'; //alterar na versão final
 
         FilePond.setOptions({
             server: {
@@ -100,10 +100,7 @@
                         type: 'DELETE',
                         url: urlFilePond + 'revert',
                         data: data,
-                        dataType: 'json',
-                        success: function(res){
-                            excludeIfInactive(res)
-                        }
+                        dataType: 'json'
                     });
 
                     error('Erro');
@@ -113,16 +110,5 @@
                 load: './load/',
             }
         });
-
-        // function excludeIfInactive(id){
-        //     setTimeout(){
-        //         $.ajax({
-        //             type: 'DELETE',
-        //             url: urlFilePond + 'inactive',
-        //             data: id,
-        //             dataType: 'json',
-        //         });
-        //     }
-        // } 
     </script>
 @endsection
