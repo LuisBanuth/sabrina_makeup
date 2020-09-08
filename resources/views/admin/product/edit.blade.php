@@ -52,16 +52,21 @@
                 
                 <div class="form-group">
                     <label for="filepond">Fotos</label>
-                    <ul>
-                        @foreach($product->photos as $photo)
-                        <li>
-                            <label>
-                                <input value="{{$photo->path}}" data-type="local" checked type="checkbox">
-                                foo.jpeg
-                            </label>
-                        </li>
-                        @endforeach
-                    </ul>
+                    <div class="row mb-4">
+                        
+                    @foreach($product->photos as $photo)
+                        <div class="col-md-2 text-center">
+                            <img src="{{ asset('storage/'. $photo->path) }}" class="img-fluid img-thumbnail mb-2">
+
+                            <!--form action="{{ route('admin.products.destroy', ['product' => $photo->id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-sm btn-danger">Excluir</button>
+                            </form-->
+                        </div>
+                    @endforeach
+                    </div>
+                    <label for="filepond">Inserir novas fotos</label>
                     <input type="file" class="my-pond" name="filepond[]" multiple>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -88,8 +93,8 @@
 
     <script>
         const inputElement = document.querySelector('input[type="file"]');
-        const pond = FilePond.create(inputElement, {maxFiles: 10,}   );
-        const urlFilePond = '/sabrina/public/filepond/'; //alterar na versão final
+        const pond = FilePond.create(inputElement, {maxFiles: 10,} );
+        const urlFilePond = '/sabrina_makeup/public/filepond/'; //alterar na versão final
 
         FilePond.setOptions({
             server: {
@@ -111,65 +116,15 @@
                         type: 'DELETE',
                         url: urlFilePond + 'revert',
                         data: data,
-                        dataType: 'json',
-                        success: function(res){
-                            //excludeIfInactive(res)
-                        }
+                        dataType: 'json'
                     });
 
                     error('Erro');
 
                     load();
                 },
-                load: (source, load, error, progress, abort, headers) => {
-                    @foreach($product->photos as $photo)
-                        // Should request a file object from the server here
-                        $.ajax({
-                            type: 'GET',
-                            url: urlFilePond + 'load/' + {{$photo->path}},
-                            dataType: 'json',
-                            success: function(res){
-                                console.log(res)
-                            }
-                        });
-                    @endforeach
-
-                    // Can call the error method if something is wrong, should exit after
-                    error('oh my goodness');
-
-                    // Can call the header method to supply FilePond with early response header string
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/getAllResponseHeaders
-                    headers(headersString);
-
-                    // Should call the progress method to update the progress to 100% before calling load
-                    // (endlessMode, loadedSize, totalSize)
-                    progress(true, 0, 1024);
-
-                    // Should call the load method with a file object or blob when done
-                    load(file);
-
-                    // Should expose an abort method so the request can be cancelled
-                    return {
-                        abort: () => {
-                            // User tapped cancel, abort our ongoing actions here
-
-                            // Let FilePond know the request has been cancelled
-                            abort();
-                        }
-                    };
-                }
+                load: './load/',
             }
         });
-
-        // function excludeIfInactive(id){
-        //     setTimeout(){
-        //         $.ajax({
-        //             type: 'DELETE',
-        //             url: urlFilePond + 'inactive',
-        //             data: id,
-        //             dataType: 'json',
-        //         });
-        //     }
-        // } 
     </script>
 @endsection

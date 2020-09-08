@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Product;
-use Illuminate\Support\Facades\Storage;
+use App\Traits\UploadTrait;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
+
     private $product;
     public function __construct(Product $product){
         $this->product = $product;
@@ -32,10 +34,10 @@ class ProductController extends Controller
         $product = $this->product->create($data);
         $photos = [];
 
-        if($data['filepond']){
+        if($data['filepond'][0] !== null){
             foreach($data['filepond'] as $photo){
-                Storage::disk('public')->move('tmp/' . $photo, 'categoryphotos/' . $photo);
-                $photo = [ 'path' => 'categoryphotos/' . $photo];
+                $photo = $this->moveUploadedPhoto($photo, 'categoryphotos', 'tmp', 'public');
+                $photo = [ 'path' => $photo];
                 $product->photos()->create($photo);
             }
         }
@@ -69,6 +71,13 @@ class ProductController extends Controller
     public function destroy($product)
     {
         $product = $this->product->find($product);
+        $photos = \App\PhotoProduct::where('product_id', $product->id)->get();
+        if($photos){
+            foreach($photos as $photo){
+                $photo->delete();
+            }
+        }
+            
         $product->delete();
 
         flash('Produto deletado');

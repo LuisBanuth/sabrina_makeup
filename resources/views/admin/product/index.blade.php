@@ -15,20 +15,22 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Corpo</th>
-                        <th>Preço</th>
-                        <th>Ações</th>
+                            <th style="width: 120px">Imagem</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($products as $p)
                         <tr>
+                            <th>
+                                <img src="@if(count($p->photos) > 0) {{ asset('storage/'. $p->photos[0]->path) }}  @endif" class="img-fluid  img-thumbnail">
+                            </th>
                             <th>{{$p->name}}</th>
                             <th>{{$p->description}}</th>
-                            <th>{{$p->body}}</th>
-                            <th>{{$p->price}}</th>
+                            <th>R$ {{ number_format($p->price, 2, ",", "")}}</th>
                             <th>
                                 <div class=btn-group>
                                     <a href="{{ route('admin.products.edit', ['product'=> $p->id]) }}" class="btn btn-sm mr-2 btn-primary">Editar</a>
