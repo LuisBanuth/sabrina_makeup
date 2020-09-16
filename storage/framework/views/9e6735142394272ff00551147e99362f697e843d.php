@@ -188,4 +188,4 @@ unset($__errorArgs, $__bag); ?>
         });
     </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sabrina\resources\views/admin/product/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sabrina_makeup\resources\views/admin/product/edit.blade.php ENDPATH**/ ?>

@@ -7,12 +7,11 @@
     <div class="card mt-4 mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Editar Produto
+            Criar Produto
         </div>
         <div class="card-body">
-            <form action="<?php echo e(route('admin.products.update', ['product' => $product->id])); ?>" method="POST">
+            <form action="<?php echo e(route('admin.products.store')); ?>" method="POST">
                 <?php echo csrf_field(); ?>
-                <?php echo method_field('put'); ?>
                 <div class="form-group">
                     <label for="name">Nome</label>
                     <input type="text" class="form-control <?php $__errorArgs = ['name'];
@@ -22,7 +21,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" value="<?php echo e($product->name); ?>" name="name">
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('name')); ?>" name="name">
                     <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -46,7 +45,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" value="<?php echo e($product->description); ?>" name="description">
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('description')); ?>" name="description">
                     <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -63,14 +62,14 @@ unset($__errorArgs, $__bag); ?>
                 </div>
                 <div class="form-group">
                     <label for="body">Corpo</label>
-                    <textarea cols="30" rows="10" type="text" class="form-control <?php $__errorArgs = ['body'];
+                    <textarea cols="30" rows="10" class="form-control <?php $__errorArgs = ['body'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="body"><?php echo e($product->body); ?></textarea>
+unset($__errorArgs, $__bag); ?>" name="body"><?php echo e(old('body')); ?></textarea>
                     <?php $__errorArgs = ['body'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -94,7 +93,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" value="<?php echo e($product->price); ?>" name="price">
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('price')); ?>" name="price">
                     <?php $__errorArgs = ['price'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -109,27 +108,22 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
+
                 
                 <div class="form-group">
-                    <label for="filepond">Fotos</label>
-                    <div class="row mb-4">
-                        
-                    <?php $__currentLoopData = $product->photos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="col-md-2 text-center">
-                            <img src="<?php echo e(asset('storage/'. $photo->path)); ?>" class="img-fluid img-thumbnail mb-2">
+                    <label for="categories">Categorias</label>
+                    <select name="categories[]" class="form-control" multiple>
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($c->id); ?>"><?php echo e($c->name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                </div>
 
-                            <!--form action="<?php echo e(route('admin.products.destroy', ['product' => $photo->id])); ?>" method="post">
-                                <?php echo csrf_field(); ?>
-                                <?php echo method_field('delete'); ?>
-                                <button class="btn btn-sm btn-danger">Excluir</button>
-                            </form-->
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </div>
-                    <label for="filepond">Inserir novas fotos</label>
+                <div class="form-group">
+                    <label for="filepond">Fotos</label>
                     <input type="file" class="my-pond" name="filepond[]" multiple>
                 </div>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary">Criar</button>
             </form>
         </div>
     </div>
@@ -149,6 +143,15 @@ unset($__errorArgs, $__bag); ?>
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 
     <!-- add before </body> -->
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+
+    <!--Poster-->
+    <!-- add to document <head> -->
+    <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet">
+
+    <!-- add before </body> -->
+    <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
     <script>
@@ -188,4 +191,4 @@ unset($__errorArgs, $__bag); ?>
         });
     </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sabrina\resources\views/admin/product/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sabrina_makeup\resources\views/admin/product/create.blade.php ENDPATH**/ ?>

@@ -19,6 +19,7 @@
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Preço</th>
+                            <th>Categorias</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -31,6 +32,11 @@
                             <th>{{$p->name}}</th>
                             <th>{{$p->description}}</th>
                             <th>R$ {{ number_format($p->price, 2, ",", "")}}</th>
+                            <th>
+                                @foreach($p->categories as $c)
+                                    #{{ $c->name }} 
+                                @endforeach
+                            </th>
                             <th>
                                 <div class=btn-group>
                                     <a href="{{ route('admin.products.edit', ['product'=> $p->id]) }}" class="btn btn-sm mr-2 btn-primary">Editar</a>

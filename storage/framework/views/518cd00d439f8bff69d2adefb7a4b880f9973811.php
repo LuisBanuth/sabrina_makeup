@@ -19,6 +19,7 @@
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Preço</th>
+                            <th>Categorias</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -31,6 +32,11 @@
                             <th><?php echo e($p->name); ?></th>
                             <th><?php echo e($p->description); ?></th>
                             <th>R$ <?php echo e(number_format($p->price, 2, ",", "")); ?></th>
+                            <th>
+                                <?php $__currentLoopData = $p->categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    #<?php echo e($c->name); ?> 
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </th>
                             <th>
                                 <div class=btn-group>
                                     <a href="<?php echo e(route('admin.products.edit', ['product'=> $p->id])); ?>" class="btn btn-sm mr-2 btn-primary">Editar</a>
@@ -52,4 +58,4 @@
     </div>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sabrina\resources\views/admin/product/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sabrina_makeup\resources\views/admin/product/index.blade.php ENDPATH**/ ?>

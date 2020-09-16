@@ -7,14 +7,15 @@
     <div class="card mt-4 mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Criar Produto
+            Editar Produto
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.products.store')}}" method="POST">
+            <form action="{{ route('admin.products.update', ['product' => $product->id])}}" method="POST">
                 @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="name">Nome</label>
-                    <input type="text" class="form-control @error('name')is-invalid @enderror" value="{{ old('name') }}" name="name">
+                    <input type="text" class="form-control @error('name')is-invalid @enderror" value="{{$product->name}}" name="name">
                     @error('name')
                         <div class="invalid-feedback">  
                             {{$message}}
@@ -23,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Descrição</label>
-                    <input type="text" class="form-control @error('description')is-invalid @enderror" value="{{ old('description') }}" name="description">
+                    <input type="text" class="form-control @error('description')is-invalid @enderror" value="{{$product->description}}" name="description">
                     @error('description')
                         <div class="invalid-feedback">  
                             {{$message}}
@@ -32,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="body">Corpo</label>
-                    <textarea cols="30" rows="10" class="form-control @error('body')is-invalid @enderror" name="body">{{ old('body') }}</textarea>
+                    <textarea cols="30" rows="10" type="text" class="form-control @error('body')is-invalid @enderror" name="body">{{ $product->body }}</textarea>
                     @error('body')
                         <div class="invalid-feedback">  
                             {{$message}}
@@ -41,29 +42,34 @@
                 </div>
                 <div class="form-group">
                     <label for="price">Preço</label>
-                    <input type="text" class="form-control @error('price')is-invalid @enderror" value="{{ old('price') }}" name="price">
+                    <input type="text" class="form-control @error('price')is-invalid @enderror" value="{{ $product->price }}" name="price">
                     @error('price')
                         <div class="invalid-feedback">  
                             {{$message}}
                         </div>
                     @enderror
                 </div>
-
                 
                 <div class="form-group">
-                    <label for="categories">Categorias</label>
-                    <select name="categories[]" class="form-control" multiple>
-                        @foreach($categories as $c)
-                            <option value="{{ $c->id }}">{{$c->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="filepond">Fotos</label>
+                    <div class="row mb-4">
+                        
+                    @foreach($product->photos as $photo)
+                        <div class="col-md-2 text-center">
+                            <img src="{{ asset('storage/'. $photo->path) }}" class="img-fluid img-thumbnail mb-2">
+
+                            <!--form action="{{ route('admin.products.destroy', ['product' => $photo->id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-sm btn-danger">Excluir</button>
+                            </form-->
+                        </div>
+                    @endforeach
+                    </div>
+                    <label for="filepond">Inserir novas fotos</label>
                     <input type="file" class="my-pond" name="filepond[]" multiple>
                 </div>
-                <button type="submit" class="btn btn-primary">Criar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
         </div>
     </div>
@@ -83,15 +89,6 @@
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 
     <!-- add before </body> -->
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
-
-    <!--Poster-->
-    <!-- add to document <head> -->
-    <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet">
-
-    <!-- add before </body> -->
-    <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
     <script>

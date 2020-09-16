@@ -25,13 +25,17 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.product.create');
+        $categories = \App\ProductCategory::all();
+        return view('admin.product.create', compact('categories'));
     }
 
     public function store(ProductRequest $request)
     {
         $data = $request->all();
+        $categories = $request->get('categories', null);
         $product = $this->product->create($data);
+        $product->categories()->sync($categories);
+
         $photos = [];
 
         if($data['filepond'][0] !== null){
@@ -64,6 +68,15 @@ class ProductController extends Controller
         $product = $this->product->find($product);
         $product->update($data);
 
+        $photos = [];
+        if($data['filepond'][0] !== null){
+            foreach($data['filepond'] as $photo){
+                $photo = $this->moveUploadedPhoto($photo, 'categoryphotos', 'tmp', 'public');
+                $photo = [ 'path' => $photo];
+                $product->photos()->create($photo);
+            }
+        }
+
         flash('Produto alterado!');
         return redirect()->route('admin.products.index');
     }
@@ -77,6 +90,7 @@ class ProductController extends Controller
                 $photo->delete();
             }
         }
+        
             
         $product->delete();
 
