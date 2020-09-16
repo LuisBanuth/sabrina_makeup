@@ -10,7 +10,7 @@
             Categorias de Produtos
         </div>
         <div class="card-body">
-            <a href="{{ route('admin.categories.products.create') }}" class="btn btn-primary mb-4">Criar produto</a>
+            <a href="{{ route('admin.categories.products.create') }}" class="btn btn-primary mb-4">Criar Categoria</a>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

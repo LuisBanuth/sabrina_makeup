@@ -86,14 +86,6 @@
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 
-    <!--Poster-->
-    <!-- add to document <head> -->
-    <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet">
-
-    <!-- add before </body> -->
-    <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
     <script>
         const inputElement = document.querySelector('input[type="file"]');
         const pond = FilePond.create(inputElement, {maxFiles: 10,} );

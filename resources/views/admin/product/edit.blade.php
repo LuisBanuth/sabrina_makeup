@@ -49,6 +49,17 @@
                         </div>
                     @enderror
                 </div>
+
+                
+                <div class="form-group">
+                    <label for="categories">Categorias</label>
+                    <select name="categories[]" class="form-control" multiple>
+                        @foreach($categories as $c)
+                            <option value="{{ $c->id }}" @if($product->categories->contains($c)) selected @endif>{{$c->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 
                 <div class="form-group">
                     <label for="filepond">Fotos</label>
@@ -56,17 +67,14 @@
                         
                     @foreach($product->photos as $photo)
                         <div class="col-md-2 text-center">
-                            <img src="{{ asset('storage/'. $photo->path) }}" class="img-fluid img-thumbnail mb-2">
-
-                            <!--form action="{{ route('admin.products.destroy', ['product' => $photo->id]) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-sm btn-danger">Excluir</button>
-                            </form-->
+                            <img src="{{ asset('storage/'. $photo->path) }}" class="img-fluid img-thumbnail mb-2 photo" photo="{{$photo->id}}">
+                            <button class="btn btn-sm btn-danger deletePhoto" href="#">Excluir</button>
                         </div>
                     @endforeach
                     </div>
-                    <label for="filepond">Inserir novas fotos</label>
+                </div>
+                <div class="form-group">
+                <label for="filepond">Inserir novas fotos</label>
                     <input type="file" class="my-pond" name="filepond[]" multiple>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -126,5 +134,38 @@
                 load: './load/',
             }
         });
+
+        if(document.querySelector('.deletePhoto')){
+            let photos = document.querySelectorAll('.deletePhoto')
+
+            for(p of photos){
+                p.addEventListener('click', function(event){
+                    event.preventDefault()
+                    let photo = this.previousElementSibling
+                    let data = {
+                        photo: photo.getAttribute('photo'),
+                        _token: '{{ csrf_token() }}'
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route("admin.products.deletephoto") }}',
+                        data: data,
+                        dataType: 'json',
+                        success: function(res){
+                            deleteItens(photo.parentElement)
+                        }
+                    })
+                })
+            }
+        }
+        
+
+        function deleteItens(...item){
+            for(i of item){
+                i.remove()
+            }
+        }
+
     </script>
 @endsection

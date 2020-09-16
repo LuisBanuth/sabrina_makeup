@@ -109,6 +109,17 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
+
+                
+                <div class="form-group">
+                    <label for="categories">Categorias</label>
+                    <select name="categories[]" class="form-control" multiple>
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($c->id); ?>" <?php if($product->categories->contains($c)): ?> selected <?php endif; ?>><?php echo e($c->name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                </div>
+
                 
                 <div class="form-group">
                     <label for="filepond">Fotos</label>
@@ -116,17 +127,14 @@ unset($__errorArgs, $__bag); ?>
                         
                     <?php $__currentLoopData = $product->photos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-2 text-center">
-                            <img src="<?php echo e(asset('storage/'. $photo->path)); ?>" class="img-fluid img-thumbnail mb-2">
-
-                            <!--form action="<?php echo e(route('admin.products.destroy', ['product' => $photo->id])); ?>" method="post">
-                                <?php echo csrf_field(); ?>
-                                <?php echo method_field('delete'); ?>
-                                <button class="btn btn-sm btn-danger">Excluir</button>
-                            </form-->
+                            <img src="<?php echo e(asset('storage/'. $photo->path)); ?>" class="img-fluid img-thumbnail mb-2 photo" photo="<?php echo e($photo->id); ?>">
+                            <button class="btn btn-sm btn-danger deletePhoto" href="#">Excluir</button>
                         </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
-                    <label for="filepond">Inserir novas fotos</label>
+                </div>
+                <div class="form-group">
+                <label for="filepond">Inserir novas fotos</label>
                     <input type="file" class="my-pond" name="filepond[]" multiple>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -186,6 +194,39 @@ unset($__errorArgs, $__bag); ?>
                 load: './load/',
             }
         });
+
+        if(document.querySelector('.deletePhoto')){
+            let photos = document.querySelectorAll('.deletePhoto')
+
+            for(p of photos){
+                p.addEventListener('click', function(event){
+                    event.preventDefault()
+                    let photo = this.previousElementSibling
+                    let data = {
+                        photo: photo.getAttribute('photo'),
+                        _token: '<?php echo e(csrf_token()); ?>'
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo e(route("admin.products.deletephoto")); ?>',
+                        data: data,
+                        dataType: 'json',
+                        success: function(res){
+                            deleteItens(photo.parentElement)
+                        }
+                    })
+                })
+            }
+        }
+        
+
+        function deleteItens(...item){
+            for(i of item){
+                i.remove()
+            }
+        }
+
     </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sabrina_makeup\resources\views/admin/product/edit.blade.php ENDPATH**/ ?>

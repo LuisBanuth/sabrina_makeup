@@ -32,6 +32,10 @@ class ProductCategoryController extends Controller
     }
 
     public function destroy($category){
+        $category = $this->category->find($category);
+        $category->delete();
 
+        flash('Categoria removida com sucesso')->success();
+        return redirect()->route('admin.categories.products.index');
     }
 }

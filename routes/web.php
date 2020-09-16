@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
 
     Route::resource('products', 'ProductController');
+    Route::post('products/deletephoto', 'ProductController@deletePhoto')->name('products.deletephoto');
 
     Route::resource('services', 'ServiceController');
 

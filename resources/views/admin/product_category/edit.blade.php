@@ -7,7 +7,7 @@
     <div class="card mt-4 mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Editar Produto
+            Editar Categoria
         </div>
         <div class="card-body">
             <form action="{{ route('admin.products.update', ['product' => $product->id])}}" method="POST">

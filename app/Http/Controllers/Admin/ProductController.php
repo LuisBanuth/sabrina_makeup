@@ -25,7 +25,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = \App\ProductCategory::all();
+        $categories = \App\ProductCategory::orderBy('name')->get();
         return view('admin.product.create', compact('categories'));
     }
 
@@ -59,13 +59,15 @@ class ProductController extends Controller
     public function edit($product)
     {
         $product = $this->product->findOrFail($product);
-        return view('admin.product.edit', compact('product'));
+        $categories = \App\ProductCategory::orderBy('name')->get();
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     public function update(ProductRequest $request, $product)
     {
         $data = $request->all();
         $product = $this->product->find($product);
+        $categories = $request->get('categories', null);
         $product->update($data);
 
         $photos = [];
@@ -76,6 +78,10 @@ class ProductController extends Controller
                 $product->photos()->create($photo);
             }
         }
+
+        if(!is_null($categories))
+            $product->categories()->sync($categories);
+
 
         flash('Produto alterado!');
         return redirect()->route('admin.products.index');
@@ -90,11 +96,17 @@ class ProductController extends Controller
                 $photo->delete();
             }
         }
-        
             
         $product->delete();
 
         flash('Produto deletado');
         return redirect()->route('admin.products.index');
+    }
+
+    public function deletePhoto(Request $request){
+        $photo = $request->get('photo');
+        $photo = \App\PhotoProduct::find($photo);
+        $photo->delete();
+        return  true;
     }
 }
