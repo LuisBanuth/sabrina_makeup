@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
+Route::get('/', 'HomeController@index');
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
 
     Route::resource('products', 'ProductController');
-    Route::post('products/deletephoto', 'ProductController@deletePhoto')->name('products.deletephoto');
+    Route::prefix('products')->name('products.')->group(function(){
+        Route::get('/category/{category}', 'ProductController@filterCategory')->name('filter');
+        Route::post('/frontpage', 'ProductController@setFrontpage')->name('frontpage');
+        Route::post('/deletephoto', 'ProductController@deletePhoto')->name('deletephoto');
+    });
 
     Route::resource('services', 'ServiceController');
 
@@ -34,5 +36,4 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
 Route::prefix('filepond')->group(function(){
     Route::post('/process', 'FilepondController@process');
     Route::delete('/revert', 'FilepondController@revert');
-    Route::get('/load/{photo}', 'FilepondController@load');
 });

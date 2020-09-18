@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->string('body');
             $table->decimal('price', 10,2);
+            $table->boolean('frontpage')->default(0);
+            $table->integer('position')->default(0);
             $table->string('slug');
             $table->timestamps();
         });

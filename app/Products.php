@@ -9,7 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 class Product extends Model
 {
     use HasSlug;
-    protected $fillable = ['name', 'description', 'body', 'price', 'slug'];
+    protected $fillable = ['name', 'description', 'body', 'price', 'frontpage', 'position', 'slug'];
 
     public function getSlugOptions() : SlugOptions
     {

@@ -103,10 +103,27 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
+    public function filterCategory($category){
+        $products = $this->product->select('products.*')->join('product_product_category', 'product_product_category.product_id', '=', 'products.id')
+                                    ->join('product_categories', 'product_categories.id', '=', 'product_product_category.product_category_id')
+                                    ->where('product_categories.id', $category)->paginate(10);
+        $filter = true;
+
+        return view('admin.product.index', compact('products', 'filter'));
+    }
+
     public function deletePhoto(Request $request){
         $photo = $request->get('photo');
         $photo = \App\PhotoProduct::find($photo);
         $photo->delete();
         return  true;
+    }
+
+    public function setFrontpage(Request $request){
+        $data = $request->all();
+        $product = $this->product->findOrFail($data['product']);
+        $product->frontpage = $data['status'] === "true" ? 1 : 0;
+        $product->update();
+        return $product->frontpage;
     }
 }

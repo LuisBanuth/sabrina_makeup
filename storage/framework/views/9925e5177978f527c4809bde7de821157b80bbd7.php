@@ -28,9 +28,9 @@
                 Produtos
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                @foreach($product_categories as $pc)
-                  <a class="dropdown-item" href="#">{{$pc->name}}</a>
-                @endforeach
+                <?php $__currentLoopData = $product_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <a class="dropdown-item" href="#"><?php echo e($pc->name); ?></a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </div>
             </li>
           </ul>
@@ -42,12 +42,13 @@
   
     <div class="row">
       <div class="container">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
       </div>
     </div>
   </body>
-  @yield('scripts')
+  <?php echo $__env->yieldContent('scripts'); ?>
 </html>
 
 
 
+<?php /**PATH C:\xampp\htdocs\sabrina_makeup\resources\views/layouts/app.blade.php ENDPATH**/ ?>
