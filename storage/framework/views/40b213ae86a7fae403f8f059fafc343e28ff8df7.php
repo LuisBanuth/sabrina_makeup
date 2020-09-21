@@ -42,19 +42,19 @@
 </style>
 
 <div class="container my-4">
-    <h2 class="font-weight-light mb-2">Destaques</h2>
+    <h2 class="font-weight-light mb-2">Promoções</h2>
     <hr>
     <div class="row mx-auto my-auto">
-        <div id="recipeCarousel" class="carousel slide w-100 mb-4" data-ride="carousel">
+        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
             <div class="carousel-inner w-100" role="listbox">
                 <?php $count = 0; ?>
                 <?php $__currentLoopData = $highlights; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $h): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="carousel-item <?php if($count == 0): ?> active <?php endif; ?>">
-                        <div class="col-md-3">
-                            <div class="card" style="width: 15rem;">
+                        <div class="col-md-3 mb-4">
+                            <div class="card" >
                                 <img class="card-img-top img-fluid" style="height:150px" src="<?php echo e(asset('storage/'. $h->photos[0]->path)); ?>" alt="<?php echo e($h->description); ?>">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo e($h->name); ?></h5>
+                                    <h6 class="card-title"><?php echo e($h->name); ?></h6>
                                     <p class="card-text"><?php echo e($h->description); ?></p>
                                     <p class="card-text">R$ <?php echo e(number_format($h->price, 2, ',', '')); ?></p>
                                 </div>
@@ -87,10 +87,10 @@
                     <div class="col-md-12 d-flex">
                 <?php endif; ?>
                 <div class="col-md-3 mb-4">
-                    <div class="card" style="width: 15rem;">
+                    <div class="card">
                         <img class="card-img-top img-fluid" style="height:150px" src="<?php echo e(asset('storage/'. $p->photos[0]->path)); ?>" alt="<?php echo e($p->description); ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo e($p->name); ?></h5>
+                            <h6 class="card-title"><?php echo e($p->name); ?></h6>
                             <p class="card-text"><?php echo e($p->description); ?></p>
                             <p class="card-text">R$ <?php echo e(number_format($p->price, 2, ',', '')); ?></p>
                         </div>
@@ -99,30 +99,27 @@
                 <?php $count++; ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-        <?php echo e($products->links()); ?>
-
     </div>
-
-
-
-
-
-
 </div>
-
-
-
-
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
 
     <script>
-        $('#recipeCarousel').carousel({
-            interval: 6000
-        })
+        if($('.carousel .carousel-item').length >= 4){
+            $('#recipeCarousel').carousel({
+                interval: 6000
+            })
+        } else {
+            $('#recipeCarousel').carousel({
+                interval: 0
+            })
+            $('.carousel-control-prev').remove()
+            $('.carousel-control-next').remove()
+        }
 
+        
         $('.carousel .carousel-item').each(function(){
             var minPerSlide = 4;
             var next = $(this).next();
@@ -140,7 +137,6 @@
                 next.children(':first-child').clone().appendTo($(this));
             }
         });
-
     </script>
 
 <?php $__env->stopSection(); ?>

@@ -517,6 +517,7 @@ class ComposerStaticInit80b1fbae3de0a08505b8b81afa7b4214
         'App\\Http\\Controllers\\Admin\\ServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ServiceController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FilepondController' => __DIR__ . '/../..' . '/app/Http/Controllers/FilepondController.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\PhotoProduct' => __DIR__ . '/../..' . '/app/Http/Controllers/PhotoProduct.php',
         'App\\Http\\Controllers\\PhotoService' => __DIR__ . '/../..' . '/app/Http/Controllers/PhotoService.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

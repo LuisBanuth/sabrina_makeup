@@ -126,4 +126,12 @@ class ProductController extends Controller
         $product->update();
         return $product->frontpage;
     }
+
+    public function setPosition(Request $request){
+        $data = $request->all();
+        $product = $this->product->findOrFail($data['product']);
+        $product->position = $data['position'];
+        $product->update();
+        return $product->position;
+    }
 }

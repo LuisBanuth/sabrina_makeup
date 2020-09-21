@@ -14,6 +14,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\ServiceController' => $baseDir . '/app/Http/Controllers/Admin/ServiceController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\FilepondController' => $baseDir . '/app/Http/Controllers/FilepondController.php',
+    'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\PhotoProduct' => $baseDir . '/app/Http/Controllers/PhotoProduct.php',
     'App\\Http\\Controllers\\PhotoService' => $baseDir . '/app/Http/Controllers/PhotoService.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
