@@ -50,12 +50,12 @@
                                 <button class="btn btn-link position" product="{{ $p->id }}">Salvar</button>
                             </td>
                             <td class="align-middle">
-                                <div class=btn-group>
-                                    <a href="{{ route('admin.products.edit', ['product'=> $p->id]) }}" class="btn btn-sm mr-2 btn-primary">Editar</a>
+                                <div style="position: relative; display: inline-flex; vertical-align: middle;">
+                                    <a href="{{ route('admin.products.edit', ['product'=> $p->id]) }}" class="btn btn-sm mr-1 btn-primary" title="Editar"><i class="fas fa-pen"></i></a>
                                     <form action="{{ route('admin.products.destroy', ['product' => $p->id]) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger">Excluir</button>
+                                        <button class="btn btn-sm btn-danger" title="Exculir"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
                             </td>

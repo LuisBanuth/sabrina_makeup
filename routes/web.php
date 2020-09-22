@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/{slug}', 'HomeController@singleProduct')->name('single.product');
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
 

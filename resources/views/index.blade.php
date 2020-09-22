@@ -39,6 +39,27 @@
     border-radius: 0;
     box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
 }
+
+a {
+ text-decoration: none;
+}
+
+/* link que ainda não foi acessado */
+a {
+   color: #000;
+}
+/* link que foi visitado */
+a:visited {
+    color: #555;
+}
+/* quando o ponteiro do mouse passa no link */
+a:hover {
+    color: #999;
+}
+/* quando o link for selecionado */
+a:active {
+    color: #333;
+}
 </style>
 
 <div class="container my-4">
@@ -51,14 +72,16 @@
                 @foreach($highlights as $h)
                     <div class="carousel-item @if($count == 0) active @endif">
                         <div class="col-md-3 mb-4">
-                            <div class="card" >
-                                <img class="card-img-top img-fluid" style="height:150px" src="{{ asset('storage/'. $h->photos[0]->path) }}" alt="{{ $h->description }}">
-                                <div class="card-body">
-                                    <h6 class="card-title">{{$h->name}}</h6>
-                                    <p class="card-text">{{ $h->description }}</p>
-                                    <p class="card-text">R$ {{ number_format($h->price, 2, ',', '')}}</p>
+                            <a class="" href="{{ route('single.product', ['slug' => $h->slug]) }}">
+                                <div class="card" >
+                                    <img class="card-img-top img-fluid" style="height:150px" src="{{ asset('storage/'. $h->photos[0]->path) }}" alt="{{ $h->description }}">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{$h->name}}</h6>
+                                        <p class="card-text">{{ $h->description }}</p>
+                                        <p class="card-text">R$ {{ number_format($h->price, 2, ',', '')}}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                     @php $count++; @endphp
@@ -87,14 +110,16 @@
                     <div class="col-md-12 d-flex">
                 @endif
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" style="height:150px" src="{{ asset('storage/'. $p->photos[0]->path) }}" alt="{{ $p->description }}">
-                        <div class="card-body">
-                            <h6 class="card-title">{{$p->name}}</h6>
-                            <p class="card-text">{{ $p->description }}</p>
-                            <p class="card-text">R$ {{ number_format($p->price, 2, ',', '')}}</p>
+                    <a class="" href="{{ route('single.product', ['slug' => $p->slug]) }}">
+                        <div class="card">
+                            <img class="card-img-top img-fluid" style="height:150px" src="{{ asset('storage/'. $p->photos[0]->path) }}" alt="{{ $p->description }}">
+                            <div class="card-body">
+                                <h6 class="card-title">{{$p->name}}</h6>
+                                <p class="card-text">{{ $p->description }}</p>
+                                <p class="card-text">R$ {{ number_format($p->price, 2, ',', '')}}</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 @php $count++; @endphp
             @endforeach
