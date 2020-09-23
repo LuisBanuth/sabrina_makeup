@@ -31,6 +31,20 @@ class ProductCategoryController extends Controller
         return redirect()->route('admin.categories.products.index');
     }
 
+    public function edit($category){
+        $category = $this->category->findOrFail($category);
+        return view('admin.product_category.edit', compact('category'));
+    }
+
+    public function update(ProductCategoryRequest $request, $category){
+        $category = $this->category->find($category);
+        $data = $request->all();
+        $category->update($data);
+
+        flash('Categoria alterada');
+        return redirect()->route('admin.categories.products.index');
+    }
+
     public function destroy($category){
         $category = $this->category->find($category);
         $category->delete();

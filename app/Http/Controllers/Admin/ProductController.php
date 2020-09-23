@@ -134,4 +134,10 @@ class ProductController extends Controller
         $product->update();
         return $product->position;
     }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $products = $this->product->where('name', 'like', "%" .$search . "%")->paginate(10);
+        return view('admin.product.index', compact('products', 'search'));
+    }
 }

@@ -45,87 +45,99 @@ a {
 }
 
 /* link que ainda não foi acessado */
-a {
+.a-card a {
    color: #000;
 }
 /* link que foi visitado */
-a:visited {
+.a-card a:visited {
     color: #555;
 }
 /* quando o ponteiro do mouse passa no link */
-a:hover {
+.a-card a:hover {
     color: #999;
 }
 /* quando o link for selecionado */
-a:active {
+.a-card a:active {
     color: #333;
 }
 </style>
+    <div class="col-md-12 ">
+        <h2 class="font-weight-light mb-2 mt-2">Promoções</h2>
+        <hr>
+        <div class="row mx-auto my-auto">
+            <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+                <div class="carousel-inner w-100" role="listbox">
+                    <?php $count = 0; ?>
+                    <?php $__currentLoopData = $highlights; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $h): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="carousel-item <?php if($count == 0): ?> active <?php endif; ?>">
+                            <div class="col-md-3 mb-4 a-card">
+                                <a class="" href="<?php echo e(route('single.product', ['slug' => $h->slug])); ?>">
+                                    <div class="card" >
+                                    <img class="card-img-top img-fluid" style="height:150px" 
+                                src="<?php if(isset($h->photos[0])): ?><?php echo e(asset('storage/'. $h->photos[0]->path)); ?>
 
-<div class="container my-4">
-    <h2 class="font-weight-light mb-2">Promoções</h2>
-    <hr>
-    <div class="row mx-auto my-auto">
-        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox">
-                <?php $count = 0; ?>
-                <?php $__currentLoopData = $highlights; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $h): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="carousel-item <?php if($count == 0): ?> active <?php endif; ?>">
-                        <div class="col-md-3 mb-4">
-                            <a class="" href="<?php echo e(route('single.product', ['slug' => $h->slug])); ?>">
-                                <div class="card" >
-                                    <img class="card-img-top img-fluid" style="height:150px" src="<?php echo e(asset('storage/'. $h->photos[0]->path)); ?>" alt="<?php echo e($h->description); ?>">
-                                    <div class="card-body">
-                                        <h6 class="card-title"><?php echo e($h->name); ?></h6>
-                                        <p class="card-text"><?php echo e($h->description); ?></p>
-                                        <p class="card-text">R$ <?php echo e(number_format($h->price, 2, ',', '')); ?></p>
+                                        <?php else: ?> <?php echo e(asset('assets/img/sem-imagem.png')); ?><?php endif; ?>" 
+                                alt="<?php echo e($h->description); ?>">
+                                        <div class="card-body">
+                                            <h6 class="card-title"><?php echo e($h->name); ?></h6>
+                                            <p class="card-text"><?php echo e($h->description); ?></p>
+                                            <p class="card-text">R$ <?php echo e(number_format($h->price, 2, ',', '')); ?></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <?php $count++; ?>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php $count++; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+                <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
     </div>
 
     <?php $count = 0; ?>
-    <h2 class="font-weight-light mb-2">Produtos</h2>
-    <hr>
-    <div class="row">
-        
-        <div class="col-md-12 d-flex">
-            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if($count % 4 === 0): ?>
-                    </div>
-                    <div class="col-md-12 d-flex">
-                <?php endif; ?>
-                <div class="col-md-3 mb-4">
-                    <a class="" href="<?php echo e(route('single.product', ['slug' => $p->slug])); ?>">
-                        <div class="card">
-                            <img class="card-img-top img-fluid" style="height:150px" src="<?php echo e(asset('storage/'. $p->photos[0]->path)); ?>" alt="<?php echo e($p->description); ?>">
-                            <div class="card-body">
-                                <h6 class="card-title"><?php echo e($p->name); ?></h6>
-                                <p class="card-text"><?php echo e($p->description); ?></p>
-                                <p class="card-text">R$ <?php echo e(number_format($p->price, 2, ',', '')); ?></p>
-                            </div>
+    <div class="col-md-12">
+        <h2 class="font-weight-light mb-2">Produtos</h2>
+        <hr>
+        <div class="row">
+            
+            <div class="col-md-12 d-flex">
+                <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($count % 4 === 0): ?>
                         </div>
-                    </a>
-                </div>
-                <?php $count++; ?>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-md-12 d-flex">
+                    <?php endif; ?>
+                    <div class="col-md-3 mb-4 a-card">
+                        <a class="" href="<?php echo e(route('single.product', ['slug' => $p->slug])); ?>">
+                            <div class="card">
+                                <img class="card-img-top img-fluid" style="height:150px" 
+                                src="<?php if(isset($p->photos[0])): ?><?php echo e(asset('storage/'. $p->photos[0]->path)); ?>
+
+                                        <?php else: ?> <?php echo e(asset('assets/img/sem-imagem.png')); ?><?php endif; ?>" 
+                                alt="<?php echo e($p->description); ?>">
+                                <div class="card-body">
+                                    <h6 class="card-title"><?php echo e($p->name); ?></h6>
+                                    <p class="card-text"><?php echo e($p->description); ?></p>
+                                    <p class="card-text">R$ <?php echo e(number_format($p->price, 2, ',', '')); ?></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php $count++; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+            <div class="col-md-12">
+                <a href="" class="float-right">Ver todos</a>
+            </div>
         </div>
     </div>
-</div>
 
 <?php $__env->stopSection(); ?>
 

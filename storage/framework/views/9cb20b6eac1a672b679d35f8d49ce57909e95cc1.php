@@ -129,7 +129,7 @@ unset($__errorArgs, $__bag); ?>
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('scripts'); ?>
+<?php $__env->startSection('scriptsFoot'); ?>
     <!-- include FilePond library -->
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 

@@ -10,10 +10,21 @@
             Produtos
         </div>
         <div class="card-body">
-            <a href="{{ route('admin.products.create') }}" class="btn btn-primary mb-4">Criar produto</a>
-            @if(isset($filter))
-                <a href="{{ route('admin.products.index') }}" class="btn btn-link mb-4">Remover filtro</a>
-            @endif
+            <div>
+                <a href="{{ route('admin.products.create') }}" class="btn btn-primary mb-4">Criar produto</a>
+                @if(isset($filter))
+                    <a href="{{ route('admin.products.index') }}" class="btn btn-link mb-4">Remover filtro</a>
+                @endif
+                <div class="float-right">
+                    <form action="{{ route('admin.products.search') }}" class="float-right" method="POST">
+                    @csrf
+                        Buscar
+                        <input type="text" name="search" value="{{ $search ?? '' }}"/>
+                    </form>
+                </div>
+                
+            </div>
+            
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

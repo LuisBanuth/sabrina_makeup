@@ -23,6 +23,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::get('/category/{category}', 'ProductController@filterCategory')->name('filter');
         Route::post('/frontpage', 'ProductController@setFrontpage')->name('frontpage');
         Route::post('/position', 'ProductController@setPosition')->name('position');
+        Route::post('/search', 'ProductController@search')->name('search');
         Route::post('/deletephoto', 'ProductController@deletePhoto')->name('deletephoto');
     });
 

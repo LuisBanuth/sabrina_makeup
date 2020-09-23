@@ -10,10 +10,21 @@
             Produtos
         </div>
         <div class="card-body">
-            <a href="<?php echo e(route('admin.products.create')); ?>" class="btn btn-primary mb-4">Criar produto</a>
-            <?php if(isset($filter)): ?>
-                <a href="<?php echo e(route('admin.products.index')); ?>" class="btn btn-link mb-4">Remover filtro</a>
-            <?php endif; ?>
+            <div>
+                <a href="<?php echo e(route('admin.products.create')); ?>" class="btn btn-primary mb-4">Criar produto</a>
+                <?php if(isset($filter)): ?>
+                    <a href="<?php echo e(route('admin.products.index')); ?>" class="btn btn-link mb-4">Remover filtro</a>
+                <?php endif; ?>
+                <div class="float-right">
+                    <form action="<?php echo e(route('admin.products.search')); ?>" class="float-right" method="POST">
+                    <?php echo csrf_field(); ?>
+                        Buscar
+                        <input type="text" name="search" value="<?php echo e($search ?? ''); ?>"/>
+                    </form>
+                </div>
+                
+            </div>
+            
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
