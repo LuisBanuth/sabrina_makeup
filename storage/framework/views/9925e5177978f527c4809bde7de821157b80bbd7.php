@@ -9,24 +9,38 @@
     <?php echo $__env->yieldContent('scriptsHead'); ?>
   </head>
   <body>
+  <style>
+    body{
+      background-color: #fff2d6;
+    }
+    nav{
+      background-color: #000000;
+    }
+    nav a {
+      color: #b19781 !important;
+    }
+    #logo {
+      height: 50px;
+    }
+  </style>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container">
-        <a class="navbar-brand" href="<?php echo e(route('index')); ?>">LOGO</a>
+        <a class="navbar-brand" href="<?php echo e(route('index')); ?>"><img id="logo" src="<?php echo e(asset('assets/img/logo.jpg')); ?>" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="<?php echo e(route('index')); ?>">Início <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="<?php echo e(route('index')); ?>">INÍCIO <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="#">FEATURES</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Produtos
+                PRODUTOS
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <?php $__currentLoopData = $product_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
