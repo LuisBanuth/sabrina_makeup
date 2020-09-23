@@ -69,7 +69,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('scriptsFoot')
     <!-- include FilePond library -->
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 

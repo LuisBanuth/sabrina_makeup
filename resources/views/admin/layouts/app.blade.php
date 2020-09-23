@@ -8,6 +8,7 @@
         <title>@yield('title')</title>
         <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        @yield('scriptsHead')
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -96,6 +97,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('assets/js/scripts.js')}}"></script>
         
-        @yield('scripts')
+        @yield('scriptsFoot')
     </body>
 </html>      

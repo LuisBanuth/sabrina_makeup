@@ -8,6 +8,7 @@
         <title><?php echo $__env->yieldContent('title'); ?></title>
         <link href="<?php echo e(asset('assets/css/styles.css')); ?>" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        <?php echo $__env->yieldContent('scriptsHead'); ?>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -96,7 +97,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo e(asset('assets/js/scripts.js')); ?>"></script>
         
-        <?php echo $__env->yieldContent('scripts'); ?>
+        <?php echo $__env->yieldContent('scriptsFoot'); ?>
     </body>
 </html>      
 <?php /**PATH C:\xampp\htdocs\sabrina_makeup\resources\views/admin/layouts/app.blade.php ENDPATH**/ ?>

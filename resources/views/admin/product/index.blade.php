@@ -70,7 +70,7 @@
 
 @endsection
 
-@section('scripts')
+@section('scriptsFoot')
     <script>
         const frontpage = document.querySelectorAll('.frontpage')
 

@@ -71,7 +71,7 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('scripts'); ?>
+<?php $__env->startSection('scriptsFoot'); ?>
     <script>
         const frontpage = document.querySelectorAll('.frontpage')
 

@@ -37,7 +37,7 @@
 
 .card {
     border-radius: 0;
-    box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.15), 0 1px 1px 0 rgba(0, 0, 0, 0.01);
 }
 
 a {
@@ -129,7 +129,7 @@ a:active {
 
 @endsection
 
-@section('scripts')
+@section('scriptsFoot')
 
     <script>
         if($('.carousel .carousel-item').length >= 4){
