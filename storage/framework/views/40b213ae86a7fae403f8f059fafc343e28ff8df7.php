@@ -36,54 +36,33 @@
 }
 
 .card {
-    border-radius: 0;
     box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.15), 0 1px 1px 0 rgba(0, 0, 0, 0.01);
 }
 
-a {
- text-decoration: none;
-}
-
-/* link que ainda não foi acessado */
-.a-card a {
-   color: #000;
-}
-/* link que foi visitado */
-.a-card a:visited {
-    color: #555;
-}
-/* quando o ponteiro do mouse passa no link */
-.a-card a:hover {
-    color: #999;
-}
-/* quando o link for selecionado */
-.a-card a:active {
-    color: #333;
-}
 </style>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-        <img class="d-block w-100" src=" <?php echo e(asset('storage/categoryphotos/6ja8vByhaYOiDGAGRKfysISiwVcReifrwCK7STWq.jpeg')); ?>" alt="First slide" style="width:100%">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img class="d-block w-100" src=" <?php echo e(asset('assets/img/banner1.jpg')); ?>" alt="First slide" style="width:100%">
+            </div>
+            <div class="carousel-item">
+            <img class="d-block w-100" src=" <?php echo e(asset('storage/categoryphotos/6ja8vByhaYOiDGAGRKfysISiwVcReifrwCK7STWq.jpeg')); ?>" alt="Second slide" style="width:100%">
+            </div>
         </div>
-        <div class="carousel-item">
-        <img class="d-block w-100" src=" <?php echo e(asset('storage/categoryphotos/6ja8vByhaYOiDGAGRKfysISiwVcReifrwCK7STWq.jpeg')); ?>" alt="Second slide" style="width:100%">
-        </div>
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 
     <div class="container">
         
-        <div class="col-md-12 ">
-            <h2 class="font-weight-light mb-2 mt-2">Promoções</h2>
+        <div class="col-md-12 mt-4">
+            <h2 class="mb-2">DESTAQUES</h2>
             <hr>
             <div class="row mx-auto my-auto">
                 <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
@@ -100,9 +79,8 @@ a {
                                             <?php else: ?> <?php echo e(asset('assets/img/sem-imagem.png')); ?><?php endif; ?>" 
                                     alt="<?php echo e($h->description); ?>">
                                             <div class="card-body">
-                                                <h6 class="card-title"><?php echo e($h->name); ?></h6>
-                                                <p class="card-text"><?php echo e($h->description); ?></p>
-                                                <p class="card-text">R$ <?php echo e(number_format($h->price, 2, ',', '')); ?></p>
+                                                <h6 class="card-title mb-0"><?php echo e($h->name); ?></h6>
+                                                <p class="card-text mb-0">R$ <?php echo e(number_format($h->price, 2, ',', '')); ?></p>
                                             </div>
                                         </div>
                                     </a>
@@ -124,18 +102,18 @@ a {
         </div>
 
         <?php $count = 0; ?>
-        <div class="col-md-12">
-            <h2 class="font-weight-light mb-2">Produtos</h2>
+        <div class="col-md-12 mt-4">
+            <h2 class="mb-2">Produtos</h2>
             <hr>
             <div class="row">
                 
                 <div class="col-md-12 d-flex">
                     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($count % 4 === 0): ?>
+                        <?php if($count % 6 === 0): ?>
                             </div>
                             <div class="col-md-12 d-flex">
                         <?php endif; ?>
-                        <div class="col-md-3 mb-4 a-card">
+                        <div class="col-md-2 a-card p-2">
                             <a class="" href="<?php echo e(route('products.single', ['slug' => $p->slug])); ?>">
                                 <div class="card">
                                     <img class="card-img-top img-fluid" style="height:150px" 
@@ -144,9 +122,8 @@ a {
                                             <?php else: ?> <?php echo e(asset('assets/img/sem-imagem.png')); ?><?php endif; ?>" 
                                     alt="<?php echo e($p->description); ?>">
                                     <div class="card-body">
-                                        <h6 class="card-title"><?php echo e($p->name); ?></h6>
-                                        <p class="card-text"><?php echo e($p->description); ?></p>
-                                        <p class="card-text">R$ <?php echo e(number_format($p->price, 2, ',', '')); ?></p>
+                                        <h6 class="card-title mb-0"><?php echo e($p->name); ?></h6>
+                                        <p class="card-text mb-0">R$ <?php echo e(number_format($p->price, 2, ',', '')); ?></p>
                                     </div>
                                 </div>
                             </a>

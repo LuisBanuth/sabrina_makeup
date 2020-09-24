@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('scriptsHead')
-    <link rel="stylesheet" href="assets/galery/css/gallery.css">
-    <script src="assets/galery/js/gallery.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets/galery/css/gallery.css')}}">
+    <script src="{{asset('assets/galery/js/gallery.js')}}"></script>
 @endsection
 
 @section('content')
@@ -39,7 +39,7 @@ h6 {
                         <h5 class="card-title">{{$product->name}}</h5>
                         <p class="card-text">{{$product->body}}</p>
                         <hr>
-                        <h6 class="card-subtitle mb-2 text-muted">R$ {{ number_format($product->price, 2,',','.') }}</h6>
+                        <h6 class="card-subtitle mb-2">R$ {{ number_format($product->price, 2,',','.') }}</h6>
                         
                     </div>
                 </div>

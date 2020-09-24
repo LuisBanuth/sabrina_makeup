@@ -11,7 +11,7 @@
   <body>
   <style>
     body{
-      background-color: #fff2d6;
+      background-color: #fbe1aa;
     }
     nav{
       background-color: #000000;
@@ -21,6 +21,40 @@
     }
     #logo {
       height: 50px;
+    }
+    h2{
+      color: #3c2a05eb;
+      font-weight: 450!important;
+    }
+
+    h6{
+      color: bisque;
+    }
+
+    .card {
+      background-color: #2b2924;
+      color: bisque;
+    }
+    
+    .a-card a {
+      text-decoration: none;
+    }
+
+    /* link que ainda não foi acessado */
+    .a-card a {
+      color: #000;
+    }
+    /* link que foi visitado */
+    .a-card a:visited {
+        color: #555;
+    }
+    /* quando o ponteiro do mouse passa no link */
+    .a-card a:hover {
+        color: #999;
+    }
+    /* quando o link for selecionado */
+    .a-card a:active {
+        color: #333;
     }
 
 }

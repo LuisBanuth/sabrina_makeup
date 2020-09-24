@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function index(){
         $highlights = \App\Product::where('frontpage', 1)->orderBy('position','DESC')->get();
 
-        $products = \App\Product::orderBy('frontpage')->orderBy('position','DESC')->take(8)->get();
+        $products = \App\Product::orderBy('frontpage')->orderBy('position','DESC')->take(6)->get();
         return view('index', compact('highlights', 'products'));
     }
 

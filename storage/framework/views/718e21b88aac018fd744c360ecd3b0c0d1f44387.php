@@ -1,8 +1,8 @@
 
 
 <?php $__env->startSection('scriptsHead'); ?>
-    <link rel="stylesheet" href="assets/galery/css/gallery.css">
-    <script src="assets/galery/js/gallery.js"></script>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/galery/css/gallery.css')); ?>">
+    <script src="<?php echo e(asset('assets/galery/js/gallery.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -39,7 +39,7 @@ h6 {
                         <h5 class="card-title"><?php echo e($product->name); ?></h5>
                         <p class="card-text"><?php echo e($product->body); ?></p>
                         <hr>
-                        <h6 class="card-subtitle mb-2 text-muted">R$ <?php echo e(number_format($product->price, 2,',','.')); ?></h6>
+                        <h6 class="card-subtitle mb-2">R$ <?php echo e(number_format($product->price, 2,',','.')); ?></h6>
                         
                     </div>
                 </div>
