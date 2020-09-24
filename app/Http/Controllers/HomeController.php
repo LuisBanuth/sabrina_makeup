@@ -13,8 +13,14 @@ class HomeController extends Controller
         return view('index', compact('highlights', 'products'));
     }
 
-    public function singleProduct($slug){
+    public function products(){
+        $products = \App\Product::orderBy('position')->paginate(12);
+        return view('products.index', compact('products'));
+    } 
+
+    public function productSingle($slug){
         $product = \App\Product::where('slug', $slug)->First();
-        return view('single.product', compact('product'));
+        return view('products.single', compact('product'));
     }
+
 }

@@ -22,6 +22,9 @@
     #logo {
       height: 50px;
     }
+
+}
+
   </style>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -54,12 +57,10 @@
     </nav>
     
   </header>
-    <div class="container">
       @yield('content')
-    </div>
   </body>
-  <footer>
-    <div class="col-md-12 bg-dark mt-4" style="height: 60px;"></div>
+  <footer class="footer font-small ">
+    <div class="col-md-12 bg-dark mt-4 " style="height: 60px;"></div>
   </footer>
   @yield('scriptsFoot')
 </html>

@@ -18,8 +18,8 @@
                 <div class="float-right">
                     <form action="<?php echo e(route('admin.products.search')); ?>" class="float-right" method="POST">
                     <?php echo csrf_field(); ?>
-                        Buscar
                         <input type="text" name="search" value="<?php echo e($search ?? ''); ?>"/>
+                        <button type="submit" class="btn btn-outline-info">Buscar</button>
                     </form>
                 </div>
                 

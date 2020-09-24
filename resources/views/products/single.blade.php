@@ -20,7 +20,7 @@ h6 {
 }
 
 </style>
-    
+<div class="container">
     <div class="row mt-4">
         <div class="col-md-8 d-flex m-auto">
             <div class="col-md-6 p-0">
@@ -46,6 +46,7 @@ h6 {
             </div>
         </div>
     </div>
+</div>
     <script>
         var a = new FgGallery('.ns', {
             cols: 4,

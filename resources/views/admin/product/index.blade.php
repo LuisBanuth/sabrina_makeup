@@ -18,8 +18,8 @@
                 <div class="float-right">
                     <form action="{{ route('admin.products.search') }}" class="float-right" method="POST">
                     @csrf
-                        Buscar
                         <input type="text" name="search" value="{{ $search ?? '' }}"/>
+                        <button type="submit" class="btn btn-outline-info">Buscar</button>
                     </form>
                 </div>
                 

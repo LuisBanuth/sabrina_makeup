@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/{slug}', 'HomeController@singleProduct')->name('single.product');
+
+Route::prefix('products')->name('products.')->group(function(){
+    Route::get('/', 'HomeController@products')->name('index');
+    Route::get('/{slug}', 'HomeController@productSingle')->name('single');
+});
+
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
 
