@@ -27,13 +27,27 @@
       font-weight: 450!important;
     }
 
+    h4{
+      color: #3c2a05eb;
+    }
+
     h6{
       color: bisque;
+      font-size: 0.9rem;
     }
 
     .card {
       background-color: #2b2924;
       color: bisque;
+      box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 1px 0 rgba(0, 0, 0, 0.01);
+    }
+    .card-text{
+      line-height: 1.1em;
+      font-size: 0.8rem
+    }
+
+    .card:hover {
+      background-color: #675d44;
     }
     
     .a-card a {
@@ -42,11 +56,11 @@
 
     /* link que ainda não foi acessado */
     .a-card a {
-      color: #000;
+      color: bisque;
     }
     /* link que foi visitado */
     .a-card a:visited {
-        color: #555;
+        color: bisque;
     }
     /* quando o ponteiro do mouse passa no link */
     .a-card a:hover {
@@ -54,7 +68,7 @@
     }
     /* quando o link for selecionado */
     .a-card a:active {
-        color: #333;
+        color: bisque;
     }
 
 }
@@ -80,8 +94,9 @@
                 PRODUTOS
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ route('products.index') }}"><u>Todos</u></a>
                 @foreach($product_categories as $pc)
-                  <a class="dropdown-item" href="#">{{$pc->name}}</a>
+                  <a class="dropdown-item" href="{{ route('products.filter', ['category'=>$pc->id]) }}">{{$pc->name}}</a>
                 @endforeach
               </div>
             </li>
@@ -93,7 +108,7 @@
   </header>
       @yield('content')
   </body>
-  <footer class="footer font-small ">
+  <footer class="footer font-small mt-4   ">
     <div class="col-md-12 bg-dark mt-4 " style="height: 60px;"></div>
   </footer>
   @yield('scriptsFoot')

@@ -14,13 +14,22 @@ class HomeController extends Controller
     }
 
     public function products(){
-        $products = \App\Product::orderBy('position')->paginate(12);
+        $products = \App\Product::orderBy('position', 'DESC')->paginate(12);
         return view('products.index', compact('products'));
     } 
 
     public function productSingle($slug){
         $product = \App\Product::where('slug', $slug)->First();
         return view('products.single', compact('product'));
+    }
+
+    public function productFilterCategory($category){
+        $products = \App\Product::select('products.*')->join('product_product_category', 'product_product_category.product_id', '=', 'products.id')
+                                    ->join('product_categories', 'product_categories.id', '=', 'product_product_category.product_category_id')
+                                    ->where('product_categories.id', $category)->orderBy('position', 'DESC')->paginate(12);
+
+        $category = \App\ProductCategory::select('name')->find($category);
+        return view('products.index', compact('products', 'category'));
     }
 
 }

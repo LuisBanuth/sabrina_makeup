@@ -35,9 +35,7 @@
   transform: translateX(0);
 }
 
-.card {
-    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.15), 0 1px 1px 0 rgba(0, 0, 0, 0.01);
-}
+
 
 </style>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -78,7 +76,7 @@
                                             @else {{ asset('assets/img/sem-imagem.png') }}@endif" 
                                     alt="{{ $h->description }}">
                                             <div class="card-body">
-                                                <h6 class="card-title mb-0">{{$h->name}}</h6>
+                                                <h6 class="card-title mb-1">{{$h->name}}</h6>
                                                 <p class="card-text mb-0">R$ {{ number_format($h->price, 2, ',', '')}}</p>
                                             </div>
                                         </div>
@@ -120,7 +118,7 @@
                                             @else {{ asset('assets/img/sem-imagem.png') }}@endif" 
                                     alt="{{ $p->description }}">
                                     <div class="card-body">
-                                        <h6 class="card-title mb-0">{{$p->name}}</h6>
+                                        <h6 class="card-title mb-1">{{$p->name}}</h6>
                                         <p class="card-text mb-0">R$ {{ number_format($p->price, 2, ',', '')}}</p>
                                     </div>
                                 </div>

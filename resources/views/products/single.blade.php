@@ -14,9 +14,8 @@ h6 {
     font-size: 1.3em;
 }
 
-.card {
-    border-radius: 0;
-    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.15), 0 1px 1px 0 rgba(0, 0, 0, 0.01);
+img, .ns div {
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 1px 0 rgba(0, 0, 0, 0.01);
 }
 
 </style>

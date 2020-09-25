@@ -4,7 +4,9 @@
     .list-group-item{
         background-color: #2b2924;
         color: bisque;
-        border: 1px solid #fff2d6;
+    }
+    .list-group-item:hover{
+      background-color: #675d44;
     }
 </style>
 <div class="container">
@@ -15,10 +17,20 @@
         
         <div class="row">
             <div class="col-md-3 bd-sidebar p-0">
-                <div class="card">
+                <div class="a-card card">
                     <ul class="list-group list-group-flush">
+                        <a href="<?php echo e(route('products.index')); ?>">
+                            <li class="list-group-item">
+                                Todos
+                            </li>
+                        </a>
                         <?php $__currentLoopData = $product_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <li class="list-group-item"><?php echo e($pc->name); ?></li>
+                        <a href="<?php echo e(route('products.filter', ['category'=>$pc->id])); ?>">
+                            <li class="list-group-item">
+                                <?php echo e($pc->name); ?>
+
+                            </li>
+                        </a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
@@ -26,6 +38,7 @@
             </div>
 
             <div class="col-md-9 mb-2 p-0">
+                <h4 class="ml-4"><?php if(isset($category)): ?><?php echo e($category->name); ?><?php else: ?> Todos os Produtos <?php endif; ?></h4>
                 <div class="col-md-12 d-flex">
                     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($count % 4 === 0 && $count !== 0): ?>
@@ -41,7 +54,7 @@
                                             <?php else: ?> <?php echo e(asset('assets/img/sem-imagem.png')); ?><?php endif; ?>" 
                                     alt="<?php echo e($p->description); ?>">
                                     <div class="card-body">
-                                        <h6 class="card-title mb-0"><?php echo e($p->name); ?></h6>
+                                        <h6 class="card-title mb-1"><?php echo e($p->name); ?></h6>
                                         <p class="card-text "><?php echo e($p->description); ?></p>
                                         <p class="card-text">R$ <?php echo e(number_format($p->price, 2, ',', '')); ?></p>
                                     </div>
