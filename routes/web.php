@@ -46,3 +46,5 @@ Route::prefix('filepond')->group(function(){
     Route::post('/process', 'FilepondController@process');
     Route::delete('/revert', 'FilepondController@revert');
 });
+
+Auth::routes();

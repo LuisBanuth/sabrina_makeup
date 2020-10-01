@@ -8,6 +8,18 @@
     .list-group-item:hover{
       background-color: #675d44;
     }
+
+    .pagination .active span{
+        color: bisque;
+        background-color: #675d44 !important;
+    }
+    .pagination span, .pagination a {
+        color: bisque;
+        background-color: #2b2924 !important;
+    }
+    .pagination .active span:hover, .pagination span:hover, .pagination a:hover {
+        background-color: #80745c !important;
+    }
 </style>
 <div class="container">
     <?php $count = 0; ?>
@@ -65,8 +77,10 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
-            <?php echo e($products->links()); ?>
+            <div class="col-md-6 m-auto text-center">
+                <?php echo e($products->links()); ?>
 
+            </div>
         </div>
     </div>
 
